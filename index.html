@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#183b2b">
+    <title>BottleBloom | Smart Plant Care</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- WELCOME SCREEN -->
+    <section id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-card">
+            <div class="brand-icon">🌿</div>
+            <p class="eyebrow">GROW GREEN. LIVE CLEAN.</p>
+            <h1>Bottle<span>Bloom</span></h1>
+            <p class="welcome-description">
+                Your personal companion for smarter,
+                greener and healthier gardening.
+            </p>
+
+            <input
+                type="text"
+                id="userName"
+                placeholder="Enter your name"
+                maxlength="30"
+            >
+
+            <button class="primary-btn" onclick="startApp()">
+                Get Started →
+            </button>
+
+            <p class="welcome-bottom">A little care. A greener world.</p>
+        </div>
+    </section>
+
+
+    <!-- MAIN APPLICATION -->
+    <div id="mainApp" class="hidden">
+
+        <header class="topbar">
+            <div class="logo">
+                <span>🌿</span>
+                <div>
+                    <h2>BottleBloom</h2>
+                    <small>SMART GARDENING</small>
+                </div>
+            </div>
+
+            <div class="profile-circle" id="profileInitial">N</div>
+        </header>
+
+
+        <main class="main-content">
+
+            <!-- HOME -->
+            <section id="home" class="page active">
+
+                <div class="hero">
+                    <div>
+                        <p class="eyebrow">YOUR GREEN SPACE</p>
+                        <h1 id="welcomeMessage">Welcome!</h1>
+                        <p>Your garden deserves a little love today.</p>
+                    </div>
+                    <div class="hero-plant">🪴</div>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <span>🔥</span>
+                        <h2 id="streakCount">0</h2>
+                        <p>Watering streak</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>🌱</span>
+                        <h2 id="gardenCount">0</h2>
+                        <p>My plants</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>💧</span>
+                        <h2 id="waterCount">0</h2>
+                        <p>Watering days</p>
+                    </div>
+
+                </div>
+
+                <div class="section-heading">
+                    <h2>Discover something new</h2>
+                    <span>DAILY DISCOVERY</span>
+                </div>
+
+                <div class="daily-card">
+                    <div class="daily-emoji" id="dailyEmoji">🌻</div>
+                    <div>
+                        <p class="eyebrow">🌞 PLANT OF THE DAY</p>
+                        <h2 id="dailyName">Sunflower</h2>
+                        <p id="dailyDescription"></p>
+                    </div>
+                </div>
+
+                <div class="section-heading">
+                    <h2>Today's green tip</h2>
+                    <span>PLANT WISDOM</span>
+                </div>
+
+                <div class="tip-card">
+                    <span>💡</span>
+                    <p id="dailyTip"></p>
+                </div>
+
+                <div class="section-heading">
+                    <h2>Quick actions</h2>
+                </div>
+
+                <div class="quick-grid">
+                    <button onclick="showPage('scan')">📷<br>Leaf Scan</button>
+                    <button onclick="showPage('explore')">🔍<br>Explore</button>
+                    <button onclick="showPage('garden')">🪴<br>My Garden</button>
+                    <button onclick="showPage('reminders')">⏰<br>Reminders</button>
+                </div>
+
+                <button class="water-btn" onclick="logWatering()">
+                    💧 I Watered My Plants Today
+                </button>
+
+            </section>
+
+
+            <!-- EXPLORE -->
+            <section id="explore" class="page">
+
+                <div class="page-heading">
+                    <p class="eyebrow">KNOW YOUR GREEN FRIENDS</p>
+                    <h1>Explore Plants</h1>
+                    <p>Discover the world of plants, one search at a time.</p>
+                </div>
+
+                <div class="search-box">
+                    <input
+                        id="plantSearch"
+                        type="search"
+                        placeholder="Search any plant name..."
+                        onkeydown="if(event.key==='Enter') searchPlant()"
+                    >
+                    <button onclick="searchPlant()">Search</button>
+                </div>
+
+                <div id="plantResult" class="result-area">
+                    <div class="empty-state">
+                        <span>🌿</span>
+                        <h3>What plant interests you?</h3>
+                        <p>Search for a plant to discover its description and growing information.</p>
+                    </div>
+                </div>
+
+                <div class="section-heading">
+                    <h2>Popular plants</h2>
+                </div>
+
+                <div class="popular-plants">
+                    <button onclick="quickSearch('Aloe vera')">🌱 Aloe Vera</button>
+                    <button onclick="quickSearch('Snake plant')">🌿 Snake Plant</button>
+                    <button onclick="quickSearch('Money plant')">🍃 Money Plant</button>
+                    <button onclick="quickSearch('Peace lily')">🌸 Peace Lily</button>
+                    <button onclick="quickSearch('Rose')">🌹 Rose</button>
+                    <button onclick="quickSearch('Sunflower')">🌻 Sunflower</button>
+                </div>
+
+            </section>
+
+
+            <!-- LEAF SCAN -->
+            <section id="scan" class="page">
+
+                <div class="page-heading">
+                    <p class="eyebrow">YOUR PLANT DOCTOR</p>
+                    <h1>LeafLens 📷</h1>
+                    <p>Check your plant's visible leaf condition.</p>
+                </div>
+
+                <div class="scan-card">
+
+                    <div class="scan-icon">🍃</div>
+
+                    <h2>Let's examine your leaf</h2>
+
+                    <p>Take a picture using your camera or select one from your gallery.</p>
+
+                    <label class="upload-btn">
+                        📷 Open Camera / Choose Photo
+                        <input
+                            type="file"
+                            id="leafImage"
+                            accept="image/*"
+                            capture="environment"
+                            onchange="previewLeaf(event)"
+                        >
+                    </label>
+
+                    <div id="imagePreview" class="image-preview"></div>
+
+                    <div id="scanControls" class="hidden">
+                        <label class="field-label">What do you notice?</label>
+
+                        <select id="leafSymptom">
+                            <option value="unknown">Not sure</option>
+                            <option value="yellow">Yellow leaves</option>
+                            <option value="brown">Brown edges or spots</option>
+                            <option value="spots">Dark or unusual spots</option>
+                            <option value="white">White powdery patches</option>
+                            <option value="wilting">Wilting or drooping</option>
+                            <option value="holes">Holes in leaves</option>
+                            <option value="healthy">Looks healthy</option>
+                        </select>
+
+                        <button class="primary-btn" onclick="analyseLeaf()">
+                            Analyse My Leaf →
+                        </button>
+                    </div>
+
+                    <div id="scanResult"></div>
+
+                </div>
+
+                <p class="disclaimer">
+                    Note: This is a preliminary visual assessment, not a confirmed disease diagnosis.
+                </p>
+
+            </section>
+
+
+            <!-- PET SAFETY -->
+            <section id="safety" class="page">
+
+                <div class="page-heading">
+                    <p class="eyebrow">A SAFER GREEN HOME</p>
+                    <h1>PlantSafe 🐾</h1>
+                    <p>Check whether a plant may be harmful to pets or children.</p>
+                </div>
+
+                <div class="safety-card">
+                    <div class="big-icon">🐶</div>
+
+                    <input
+                        type="search"
+                        id="safetySearch"
+                        placeholder="Enter plant name..."
+                        onkeydown="if(event.key==='Enter') checkSafety()"
+                    >
+
+                    <button class="primary-btn" onclick="checkSafety()">
+                        Check Plant Safety
+                    </button>
+
+                    <div id="safetyResult"></div>
+                </div>
+
+                <p class="disclaimer">
+                    Always keep unknown plants away from children and pets.
+                    This database is not exhaustive. Confirm serious exposure
+                    concerns with a veterinarian or medical professional.
+                </p>
+
+            </section>
+
+
+            <!-- MY GARDEN -->
+            <section id="garden" class="page">
+
+                <div class="page-heading">
+                    <p class="eyebrow">YOUR PERSONAL GREEN SPACE</p>
+                    <h1>My Garden 🪴</h1>
+                    <p>Every plant has its own little story.</p>
+                </div>
+
+                <div class="add-card">
+                    <h2>＋ Add a new plant</h2>
+
+                    <input id="newPlantName" placeholder="Plant name">
+
+                    <input id="newPlantDate" type="date">
+
+                    <input id="newPlantLocation" placeholder="Location (e.g. Balcony)">
+
+                    <button class="primary-btn" onclick="addPlant()">
+                        Add to My Garden
+                    </button>
+                </div>
+
+                <div class="section-heading">
+                    <h2>Your plants</h2>
+                </div>
+
+                <div id="gardenList" class="garden-list"></div>
+
+            </section>
+
+
+            <!-- REMINDERS -->
+            <section id="reminders" class="page">
+
+                <div class="page-heading">
+                    <p class="eyebrow">NEVER MISS A WATERING DAY</p>
+                    <h1>Reminders ⏰</h1>
+                    <p>Create your own plant-care schedule.</p>
+                </div>
+
+                <div class="add-card">
+                    <h2>Create a reminder</h2>
+
+                    <input id="reminderPlant" placeholder="Plant name">
+
+                    <label class="field-label">Reminder date</label>
+                    <input id="reminderDate" type="date">
+
+                    <label class="field-label">Reminder time</label>
+                    <input id="reminderTime" type="time">
+
+                    <select id="reminderType">
+                        <option value="Watering">💧 Watering</option>
+                        <option value="Fertilizing">🌱 Fertilizing</option>
+                        <option value="Pruning">✂️ Pruning</option>
+                        <option value="Sunlight">☀️ Sunlight check</option>
+                        <option value="Other">🪴 Other care</option>
+                    </select>
+
+                    <button class="primary-btn" onclick="addReminder()">
+                        Save Reminder
+                    </button>
+
+                    <button class="secondary-btn" onclick="enableNotifications()">
+                        Enable Browser Notifications
+                    </button>
+                </div>
+
+                <div class="section-heading">
+                    <h2>Your schedule</h2>
+                </div>
+
+                <div id="reminderList"></div>
+
+            </section>
+
+
+            <!-- ECO IMPACT -->
+            <section id="eco" class="page">
+
+                <div class="page-heading">
+                    <p class="eyebrow">SMALL ACTIONS. BIGGER CHANGE.</p>
+                    <h1>EcoImpact 🌍</h1>
+                    <p>See how your garden contributes to a greener environment.</p>
+                </div>
+
+                <div class="eco-hero">
+                    <span>♻️</span>
+                    <h2>Grow More. Waste Less.</h2>
+                    <p>Transform discarded materials into something beautiful.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span>♻️</span>
+                        <h2 id="bottleCount">0</h2>
+                        <p>Bottles reused</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>🌱</span>
+                        <h2 id="ecoPlants">0</h2>
+                        <p>Plants growing</p>
+                    </div>
+                </div>
+
+                <div class="add-card">
+                    <h2>Track your recycling</h2>
+                    <p>How many plastic bottles have you reused in your garden?</p>
+                    <input type="number" id="bottleInput" min="0" placeholder="Enter number">
+                    <button class="primary-btn" onclick="saveBottles()">
+                        Update Eco Impact
+                    </button>
+                </div>
+
+            </section>
+
+
+            <!-- PLANT MATCH -->
+            <section id="match" class="page">
+
+                <div class="page-heading">
+                    <p class="eyebrow">FIND YOUR PERFECT PLANT</p>
+                    <h1>PlantMatch 🌿</h1>
+                    <p>Discover plants according to your growing conditions.</p>
+                </div>
+
+                <div class="add-card">
+                    <label class="field-label">Available sunlight</label>
+                    <select id="sunlight">
+                        <option value="low">Low sunlight</option>
+                        <option value="medium">Indirect sunlight</option>
+                        <option value="high">Direct sunlight</option>
+                    </select>
+
+                    <label class="field-label">Your experience</label>
+                    <select id="experience">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                    </select>
+
+                    <button class="primary-btn" onclick="findPlants()">
+                        Find My Plants
+                    </button>
+                </div>
+
+                <div id="matchResults"></div>
+
+            </section>
+
+
+            <!-- VERTICAL GARDEN DESIGNER -->
+            <section id="builder" class="page">
+
+                <div class="page-heading">
+                    <p class="eyebrow">DESIGN YOUR GREEN SPACE</p>
+                    <h1>BloomBuilder 🏡</h1>
+                    <p>Plan your own vertical garden.</p>
+                </div>
+
+                <div class="add-card">
+                    <label class="field-label">Available space</label>
+                    <select id="gardenSpace">
+                        <option value="small">Small balcony</option>
+                        <option value="medium">Medium wall</option>
+                        <option value="large">Large garden wall</option>
+                    </select>
+
+                    <label class="field-label">Sunlight</label>
+                    <select id="gardenLight">
+                        <option value="low">Low sunlight</option>
+                        <option value="medium">Partial sunlight</option>
+                        <option value="high">Direct sunlight</option>
+                    </select>
+
+                    <label class="field-label">Preferred style</label>
+                    <select id="gardenStyle">
+                        <option value="recycled">Recycled bottle garden</option>
+                        <option value="herbs">Herb garden</option>
+                        <option value="decorative">Decorative garden</option>
+                    </select>
+
+                    <button class="primary-btn" onclick="buildGarden()">
+                        Generate My Garden Plan
+                    </button>
+                </div>
+
+                <div id="builderResults"></div>
+
+            </section>
+
+        </main>
+
+
+        <!-- BOTTOM NAVIGATION -->
+        <nav class="bottom-nav">
+
+            <button class="nav-item selected" onclick="showPage('home',this)">
+                <span>⌂</span>Home
+            </button>
+
+            <button class="nav-item" onclick="showPage('explore',this)">
+                <span>🔍</span>Explore
+            </button>
+
+            <button class="nav-item" onclick="showPage('scan',this)">
+                <span>📷</span>Scan
+            </button>
+
+            <button class="nav-item" onclick="showPage('garden',this)">
+                <span>🪴</span>Garden
+            </button>
+
+            <button class="nav-item" onclick="showPage('safety',this)">
+                <span>🐾</span>Safety
+            </button>
+
+            <button class="nav-item" onclick="showPage('reminders',this)">
+                <span>⏰</span>Reminders
+            </button>
+
+            <button class="nav-item" onclick="showPage('eco',this)">
+                <span>♻️</span>Eco
+            </button>
+
+        </nav>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
